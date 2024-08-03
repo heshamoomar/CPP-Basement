@@ -1,0 +1,32 @@
+// DP top-down approach (memoization) O(n)
+#include<iostream>
+using namespace std;
+#define ll unsigned long long
+const ll sz = 101;
+ll arr[sz];
+
+void init_result() {
+    for (ll i = 0; i < sz; i++)
+        arr[i] = -1;
+}
+
+ll Fibonacci(ll n) {
+    if (n <= 1)
+        return n;
+
+    if (arr[n] != -1)
+        return arr[n];
+
+    arr[n] = Fibonacci(n - 1) + Fibonacci(n - 2);
+    return arr[n];
+}
+
+int main()
+{
+    init_result();
+    for (int i = 0; i <= 50; i++)
+        cout << Fibonacci(i) << " ";
+
+    //init_result();
+    //cout << Fibonacci(100);
+}
