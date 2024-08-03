@@ -1,0 +1,26 @@
+#include <iostream>
+
+double fact(double n)
+{
+	double result = 1;
+	for (double i = 1; i <= n; i++)
+	{
+		result *= i;
+	}
+	return result;
+}
+
+double perm(double n, double r)
+{
+	return fact(n) / fact(n - r);
+}
+
+double comb(double n, double r)
+{
+	return fact(n) / fact(r)*fact(n - r);
+}
+
+int main()
+{
+	std::cout << comb(9, 8) << std::endl;
+}

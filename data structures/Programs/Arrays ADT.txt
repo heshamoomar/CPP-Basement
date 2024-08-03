@@ -1,0 +1,228 @@
+#include <iostream>
+using namespace std;
+
+class Array
+{
+private:
+    int size;
+    int length;
+    int* item;
+
+public:
+    Array(int ArraySize)
+    {
+        size = ArraySize;
+        length = 0;
+        item = new int[ArraySize];
+    }
+
+    void Fill()
+    {
+        int Num_of_items;
+
+        cout << "Number of items to enter: \n";
+
+        cin >> Num_of_items;
+
+        if (Num_of_items > size)
+        {
+            cout << "Array size exceeded!\n";
+            return;
+        }
+        else
+        {
+            for (int i = 0; i < Num_of_items; i++)
+            {
+                cout << "Enter item " << i<< ": ";
+                cin >> item[i];
+                length++;
+            }
+            cout << endl;
+        }
+    }
+
+    int getSize()
+    {
+        return size;
+    }
+
+    int getLength()
+    {
+        return length;
+    }
+
+    void Display()
+    {
+        cout << "Array contents: \n";
+        for (int i = 0; i < length; i++)
+        {
+            cout << item[i] << "\t";
+        }
+        cout << "\n\n";
+    }
+
+    int Search(int Searched_item)
+    {
+        int index = -1;
+        for (int i = 0; i < length; i++)
+        {
+            if (Searched_item==item[i])
+            {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+
+    void Append(int New_item)
+    {
+        if (size>length)
+        {
+            item[length] = New_item;
+            length++;
+        }
+        else
+        {
+            cout << "Array is full!\n";
+        }
+    }
+
+    void Insert(int index, int New_item)
+    {
+        if (index>=0&&index<size)
+        {
+            for (int i = length; i > index; i--)
+            {
+                item[i] = item[i - 1];
+            }
+            item[index] = New_item;
+            length++;
+        }
+        else
+        {
+            cout << "Index out of range!\n";
+        }
+    }
+
+    void Delete(int index)
+    {
+        if (index >= 0 && index < size)
+        {
+            for (int i = index; i < length - 1; i++)
+            {
+                item[i] = item[i + 1];
+            }
+            length--;
+        }
+        else
+        {
+            cout << "Index out of range!\n";
+        }
+    }
+
+    void Enlarge(int New_size)
+    {
+        if (New_size<=size)
+        {
+            cout << "New size must be larger than current size.\n";
+            return;
+        }
+        else
+        {
+            size = New_size;
+            int* temp = item;
+            item = new int[New_size];
+            for (int i = 0; i < length; i++)
+            {
+                item[i] = temp[i];
+            }
+            delete[]temp;
+        }
+    }
+
+    void Merge(Array Other)
+    {
+        int New_size = size + Other.getSize();
+        size = New_size;
+        int* Old = item;
+        item = new int[New_size];
+        int i;
+        for (i = 0; i < length; i++)
+        {
+            item[i] = Old[i];
+        }
+        delete[]Old;
+        int j = i;
+        for (int i = 0; i < Other.getLength(); i++)
+        {
+            item[j++] = Other.item[i];
+            length++;
+        }
+    }
+};
+
+int main()
+{
+    cout << "+-+-Array ADT demo-+-+\n\n";
+
+    int arrSize;
+    cout << "Enter array size: \n";
+    cin >> arrSize;
+
+    Array newArray(arrSize);
+
+    newArray.Fill();
+
+    cout << "Array size = " << newArray.getSize() << "\t";
+    cout << "Array length = " << newArray.getLength() << "\n\n";
+
+    newArray.Display();
+
+    //int Searched_item;
+    //cout << "Enter item to search for: ";
+    //cin >> Searched_item;
+    //int index = newArray.Search(Searched_item);
+    //if (index == -1)
+    //    cout << "Item not found!\n\n";
+    //else
+    //    cout << "Item found at position " << index << "\n\n";
+
+    //int New_item;
+    //cout << "Enter item to add: \n";
+    //cin >> New_item;
+    //cout << endl;
+    //newArray.Append(New_item);
+
+    //newArray.Display();
+
+    //int index;
+    //int New_item;
+    //cout << "Enter index then item to insert: \n";
+    //cin >> index;
+    //cin >> New_item;
+    //newArray.Insert(index, New_item);
+
+    //int index;
+    //cout << "Enter index to delete item: \n";
+    //cin >> index;
+    //newArray.Delete(index);
+
+    //int New_size;
+    //cout << "Enter new size of array:\n";
+    //cin >> New_size;
+    //newArray.Enlarge(New_size);
+
+    //newArray.Display();
+    //cout << "Array size = " << newArray.getSize() << "\t";
+    //cout << "Array length = " << newArray.getLength() << "\n\n";
+
+    Array Other(3);
+    Other.Fill();
+    newArray.Merge(Other);
+    newArray.Display();
+    cout << "Array size = " << newArray.getSize() << "\t";
+    cout << "Array length = " << newArray.getLength() << "\n\n";
+
+    return 0;
+}

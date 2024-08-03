@@ -1,0 +1,149 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+	int data;
+	Node* next;
+	Node()
+	{
+		data = 0;
+		next = NULL;
+	}
+};
+
+class Stack
+{
+	Node* top;
+
+public:
+	Stack()
+	{
+		top = NULL;
+	}
+
+	bool isEmpty()
+	{
+		return(top == NULL);
+	}
+
+	void push(int item)
+	{
+		Node* newNode = new Node();
+		newNode->data = item;
+		if (isEmpty())
+		{
+			newNode->next = NULL; // unnecessary step because next is set to NULL in the constructor above
+			top = newNode;
+		}
+		else
+		{
+			newNode->next = top;
+			top = newNode;
+		}
+	}
+
+	//int pop()
+	//{
+	//	int poped_item;
+	//	Node* temp = new Node();
+	//	temp = top;
+	//	poped_item = top->data;
+	//	top = top->next;
+	//	delete temp;
+	//	return poped_item;
+	//}
+
+	//int peek()
+	//{
+	//	return top->data;
+	//}
+
+	void display()
+	{
+		Node* temp = new Node();
+		temp = top;
+		while (temp!=NULL)
+		{
+			cout << temp->data << " ";
+			temp = temp->next;
+		}
+		delete temp;
+		cout << endl;
+	}
+
+	//int count()
+	//{
+	//	int counter = 0;
+	//	Node* temp = new Node();
+	//	temp = top;
+	//	while (temp!=NULL)
+	//	{
+	//		counter++;
+	//		temp = temp->next;
+	//	}
+	//	delete temp;
+	//	return counter;
+	//}
+
+	int Convert_to_Binary()
+	{
+		int n = 0;
+		int decimal_value = 0;
+		Node* temp = new Node();
+		temp = top;
+		while (temp != NULL)
+		{
+			decimal_value += (temp->data * pow(2, n));
+			temp = temp->next;
+			n++;
+		}
+		delete temp;
+		return decimal_value;
+	}
+};
+
+
+
+
+int main()
+{
+	//Stack s1;
+	//int item;
+	//for (int i = 0; i < 5; i++)
+	//{
+	//	cout << "Enter item to push\n";
+	//	cin >> item;
+	//	s1.push(item);
+	//	s1.display();
+	//}
+
+	//cout << s1.Convert_to_Binary();
+
+	Stack s2;
+	s2.push(1);
+	s2.push(0);
+	s2.push(0);
+	s2.push(1);
+	s2.push(0);
+	s2.push(1);
+	s2.push(1);
+	s2.push(1);
+	s2.push(1);
+	s2.push(1);
+	s2.push(1);
+	s2.push(1);
+	s2.push(1);
+	s2.push(1);
+	
+	s2.display();
+	cout << s2.Convert_to_Binary();
+
+	//cout << s1.pop() << " was deleted from stack\n";
+	//s1.display();
+	//cout << s1.pop() << " wgas deleted from stack\n";
+	//s1.display();
+
+    return 0;
+}

@@ -1,0 +1,106 @@
+#include <iostream>
+using namespace std;
+
+class Node
+{
+public:
+    int data;
+    Node* next;
+};
+
+class Linked_List
+{
+public:
+    Node* head;
+
+    Linked_List()
+    {
+        head = NULL;
+    }
+
+    bool is_empty()
+    {
+        return(head == NULL);
+    }
+
+    void insert_first(int new_value)
+    {
+        Node* new_node = new Node();
+        new_node->data = new_value;
+
+        if (is_empty())
+        {
+            new_node->next = NULL;
+            head = new_node;
+        }
+        else
+        {
+            new_node->next = head;
+            head = new_node;
+        }
+    }
+
+    void Display()
+    {
+        Node* current = head;
+        while (current != NULL)
+        {
+            cout << current->data << " ";
+            current = current->next;
+        }
+    }
+
+    int count()
+    {
+        int counter = 0;
+        Node* current = head;
+        while (current != NULL)
+        {
+            counter++;
+            current = current->next;
+        }
+        return counter;
+    }
+
+    bool is_found(int key)
+    {
+        bool found = false;
+        Node* current = head;
+        while (current != NULL)
+        {
+            if (current->data == key)
+                found = true;
+            current = current->next;
+        }
+        return found;
+    }
+
+};
+
+int main()
+{
+    Linked_List newList;
+    if (newList.is_empty())
+        cout << "List is empty!\n";
+    else
+        cout << "List contains " << newList.count() << " items\n";
+
+    int new_item=0;
+    while (new_item != -1)
+    {
+        cout << "Enter items to inset (and -1 to stop): \n";
+        cin >> new_item;
+        newList.insert_first(new_item);
+        cout << "List contains " << newList.count() << " items\n";
+        newList.Display();
+        cout << endl;
+    }
+
+    cout << "Enter to search for: \n";
+    cin >> new_item;
+    if (newList.is_found(new_item))
+        cout << "Item is found\n";
+    else
+        cout << "Item not found!\n";
+
+}
