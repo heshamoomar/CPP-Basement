@@ -1,0 +1,37 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+
+int ReadPositiveNum() {
+	int n;
+	do
+	{
+		cout << "Enter a positive number: ";
+		cin >> n;
+	} while (n <= 0);
+	return n;
+}
+
+int DegreeOfNum(int n) {
+	int count = 0;
+	do
+	{
+		n /= 10;
+		count++;
+	} while (n != 0);
+	return count;
+}
+
+void PrintDigitsInOrder(int n) {
+	int degree = DegreeOfNum(n);
+	for (int i = degree; i >= 0; i--)
+	{
+			int res = int(n / pow(10, i));
+			if (res % 10 != 0)
+				cout << res % 10 << endl;
+	}
+}
+
+int main() {
+	PrintDigitsInOrder(ReadPositiveNum());
+}

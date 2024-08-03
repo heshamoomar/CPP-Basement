@@ -1,0 +1,74 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+
+int ReadPositiveNum() {
+	int n;
+	do
+	{
+		cout << "Enter a positive number: ";
+		cin >> n;
+	} while (n <= 0);
+	return n;
+}
+
+int CountDigitFrequency(int numToCheck, int FrequencyOf) {
+	int freq = 0;
+	do
+	{
+		if (numToCheck % 10 == FrequencyOf)
+			freq++;
+		numToCheck /= 10;
+	} while (numToCheck != 0);
+	return freq;
+}
+
+void PrintAllDigitsFrequency(int n) {
+	for (int i = 0; i <= 10; i++)
+	{
+		if(CountDigitFrequency(n, i))
+			cout << "Digit " << i << " Frequency is " << CountDigitFrequency(n, i) << " Time(s)." << endl;
+	}
+}
+
+int main() {
+
+	PrintAllDigitsFrequency(ReadPositiveNum());
+}
+
+#include <iostream>
+#include<vector>
+using namespace std;
+
+int ReadPositiveNum() {
+	int n;
+	do
+	{
+		cout << "Enter a positive number: ";
+		cin >> n;
+	} while (n <= 0);
+	return n;
+}
+
+void CountDigitFrequency(int numToCheck, int FrequencyOf) {
+	int freq = 0;
+	do
+	{
+		if (numToCheck % 10 == FrequencyOf)
+			freq++;
+		numToCheck /= 10;
+	} while (numToCheck != 0);
+	cout << "Digit " << FrequencyOf << " Frequency is " << freq << " Time(s)." << endl;
+}
+
+void PrintAllDigitsFrequency(int n) {
+	for (int i = 0; i <= 10; i++)
+	{
+		CountDigitFrequency(n, i);
+	}
+}
+
+int main() {
+
+	PrintAllDigitsFrequency(ReadPositiveNum());
+}

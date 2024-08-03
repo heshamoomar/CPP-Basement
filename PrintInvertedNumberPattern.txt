@@ -1,0 +1,70 @@
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int ReadPositiveNumber() {
+    int n;
+    do
+    {
+        cout << "Enter a positive number: ";
+        cin >> n;
+    } while (n <= 0);
+    return n;
+}
+
+void PrintInvertedPattern(int num) {
+    for (int i = num; i > 0; i--)
+    {
+        for (int j = 0; j < i; j++)
+        {
+            cout << i;
+        }
+        cout << endl;
+    }
+}
+
+int main() {
+
+    PrintInvertedPattern(ReadPositiveNumber());
+    return 0;
+}
+
+
+mine
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int ReadPositiveNumber() {
+    int n;
+    do
+    {
+        cout << "Enter a positive number: ";
+        cin >> n;
+    } while (n <= 0);
+    return n;
+}
+
+void PrintInvertedPattern(int num) {
+    int counter = num;
+    do
+    {
+        for (int i = num; i > 0; i--)
+        {
+            for (int j = 0; j < num; j++)
+            {
+                cout << num;
+            }
+            num--;
+            cout << endl;
+        }
+    } while (counter!=0);
+}
+
+int main() {
+
+    PrintInvertedPattern(ReadPositiveNumber());
+    return 0;
+}

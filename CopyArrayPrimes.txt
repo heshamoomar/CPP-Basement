@@ -1,0 +1,57 @@
+#include <iostream>
+using namespace std;
+
+void PrintArray(int arr[], int size) {
+	for (int i = 0; i < size; i++) {
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+}
+
+int RandomNumber(int From, int To) {
+	return rand() % (To - From + 1) + From;
+}
+
+void FillArrayWRandoms(int arr[], int size) {
+	for (int i = 0; i < size; i++) {
+		arr[i] = RandomNumber(0, 100);
+	}
+}
+
+bool isPrime(int n) {
+	for (int i = 2; i <= sqrt(n); i++)
+		if (n % i == 0)	return false;
+	return true;
+}
+
+int CopyArrayPrimes(int arr1[], int arr2[], int size) {
+	int index = 0;
+	for (int i = 0; i < size; i++)
+	{
+		if (isPrime(arr1[i])) {
+			arr2[index] = arr1[i];
+			index++;
+		}
+	}return index;
+}
+
+const int maxSize = 1000;
+
+int main() {
+	srand(time(0));
+
+	cout << "Enter array size: ";
+	int sz; cin >> sz;
+	if (sz > maxSize) {
+		cout << "Size exceeds maximum allowed (" << maxSize << "). Setting size to " << maxSize << ".\n";
+		sz = maxSize;
+	}
+
+	int arr1[maxSize];
+	int arr2[maxSize];
+	FillArrayWRandoms(arr1, sz);
+	int newSize = CopyArrayPrimes(arr1, arr2, sz);
+	cout << "Array 1: "; PrintArray(arr1, sz);
+	cout << "Array 2: "; PrintArray(arr2, newSize);
+}
+

@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+
+const int ASCII_A = 65;
+const int ASCII_Z = 90;
+const int KEY_LENGTH = 16;
+
+int RandomNumber(int min, int max) {
+	return min + rand() % (max - min + 1);
+}
+
+string GenerateKey() {
+	string Key;
+	for (int i = 1; i <= KEY_LENGTH; i++)
+	{
+		Key += char(RandomNumber(ASCII_A, ASCII_Z)); // Generate uppercase letters
+		if (i % 4 == 0 && i != KEY_LENGTH)
+			Key += '-'; // Insert hyphens after every 4 characters, except at the end
+	}
+	return Key;
+}
+
+void Key_Generator(int numOfKeys) {
+	string Key;
+	for (int i = 0; i < numOfKeys; i++)
+	{
+		Key = GenerateKey();
+		cout << "Key [" << i << "]: " << Key << endl;
+	}
+}
+
+int main() {
+	srand(time(0)); // Seed random number generator with current time
+	Key_Generator(10);
+}

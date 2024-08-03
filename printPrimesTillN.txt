@@ -1,0 +1,60 @@
+#include <iostream>
+using namespace std;
+
+enum enPrimeNotPrime
+{
+	Prime = 1, NotPrime = 2
+};
+
+enPrimeNotPrime isPrime(int n) {
+	for (int i = 2; i <= sqrt(n); i++)
+	{
+		if (n % i == 0)
+			return enPrimeNotPrime::NotPrime;
+	}
+	return enPrimeNotPrime::Prime;
+}
+
+void printPrimesTillN() {
+	cout << "Enter N: ";
+	int n; cin >> n;
+	cout << "Primes from 1 till " << n << ": ";
+	for (int i = 2; i <= n; i++)
+	{
+		if (isPrime(i)==enPrimeNotPrime::Prime)
+			cout << i << ' ';
+	}cout << endl;
+}
+
+int main() {
+	printPrimesTillN();
+}
+
+
+mine
+#include <iostream>
+using namespace std;
+
+bool isPrime(int n) {
+	for (int i = 2; i <= sqrt(n); i++)
+	{
+		if (n % i == 0)
+			return false;
+	}
+	return true;
+}
+
+void printPrimesTillN() {
+	cout << "Enter N: ";
+	int n; cin >> n;
+	cout << "Primes from 1 till " << n << ": ";
+	for (int i = 2; i <= n; i++)
+	{
+		if (isPrime(i))
+			cout << i << ' ';
+	}cout << endl;
+}
+
+int main() {
+	printPrimesTillN();
+}

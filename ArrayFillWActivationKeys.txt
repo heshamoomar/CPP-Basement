@@ -1,0 +1,60 @@
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+
+using namespace std;
+
+const int ASCII_A = 65;
+const int ASCII_Z = 90;
+const int KEY_LENGTH = 16;
+const int SEGMENT_LENGTH = 4;
+const int MAX_SIZE = 50;
+
+int EnterArraySize() {
+	cout << "Enter array size: ";
+	int size; 
+	cin >> size;
+	if (size > MAX_SIZE) {
+		cout << "Size exceeds maximum allowed (" << MAX_SIZE << "). Setting size to " << MAX_SIZE << ".\n";
+		size = MAX_SIZE;
+	}
+	return size;
+}
+
+void PrintStringArray(string arr[], int size) {
+	for (int i = 0; i < size; i++) {
+		cout << "Array [" << i + 1 << "]: " << arr[i] << '\n';
+	}
+	cout << endl;
+}
+
+int RandomNumber(int min, int max) {
+	return min + rand() % (max - min + 1);
+}
+
+string GenerateKey() {
+	string Key;
+	for (int i = 1; i <= KEY_LENGTH; i++)
+	{
+		Key += char(RandomNumber(ASCII_A, ASCII_Z)); // Generate uppercase letters
+		if (i % SEGMENT_LENGTH == 0 && i != KEY_LENGTH)
+			Key += '-'; // Insert hyphens after every 4 characters, except at the end
+	}
+	return Key;
+}
+
+void ArrayFillWKeys(string arr[], int size) {
+	for (int i = 0; i < size; i++)	arr[i] = GenerateKey();
+}
+
+int main() {
+	srand(time(0));
+
+	int sz = EnterArraySize();
+	string arr[MAX_SIZE];
+	ArrayFillWKeys(arr, sz);
+	PrintStringArray(arr, sz);
+
+	return 0;
+}
+
