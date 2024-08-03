@@ -1,0 +1,313 @@
+----------------------------------------------------------------------------------------------------------
+Insertion Sort 
+----------------------------------------------------------------------------------------------------------
+#include <iostream>
+using namespace std;
+void insertionSort(int arr[] , int n){
+    int key , j   ;                       // 0  1  2  3  4  5  6
+    for(int i=1 ; i<n ; i++ ){           // 80 90 60 30 50 70 40
+        key=arr[i];
+        j=i-1;
+        
+        while(j>=0 && arr[j] > key){
+            arr[j+1]=arr[j];
+            j=j-1;
+        }
+        arr[j+1]=key;
+    }
+}
+
+void printArray(int arr[] , int n){
+    for(int i=0 ; i<n ; i++)
+        cout<<arr[i]<<"  ";
+        cout<<endl;
+}
+
+int main() {
+    int arr[]={80,90,60,30,50,70,40};
+    insertionSort(arr,7);
+    printArray(arr,7);
+
+    return 0;
+}
+
+----------------------------------------------------------------------------------------------------------
+Selection Sort
+----------------------------------------------------------------------------------------------------------
+
+/* Online C++ Compiler and Editor */
+#include <iostream>
+
+using namespace std;
+void selectionSort(int arr[], int n) 
+{ 
+    int minidx;                           // 0  1  2  3  4  5
+    for (int i = 0; i < n-1; i++) {          // 60 40 50 30 10 20
+        minidx = i; 
+        for (int j = i+1; j < n; j++)
+            if (arr[j] < arr[minidx])    
+            minidx = j; 
+            swap(arr[minidx],arr[i]);
+     }
+}
+        
+void swap(int x , int y){
+        int temp = x; 
+        x=y; 
+        y= temp; 
+} 
+
+void printArray(int arr[] , int n){
+    for(int i=0 ; i<n ; i++)
+        cout<<arr[i]<<"  ";
+        cout<<endl;
+}
+int main()
+{
+   int arr[]={60,40,50,30,10,20};
+   selectionSort(arr,6);
+    printArray(arr,6);
+   
+   return 0;
+}
+
+----------------------------------------------------------------------------------------------------------
+Bubble Sort : 
+----------------------------------------------------------------------------------------------------------
+
+void bubbleSort(int arr[], int n) 
+{  
+    for (int i = 0; i < n-1; i++)
+    {
+        int flag = 0;
+        for (int j = 0; j < n-i-1; j++) 
+        {
+            if (arr[j] > arr[j+1])
+            {
+                int temp = arr[j]; 
+                arr[j] = arr[j+1]; 
+                arr[j+1] = temp; 
+	flag = 1
+            }
+        }
+        if(flag == 0) break;
+    }      
+}
+
+void printArray(int arr[] , int n){
+     
+      for(int i=0 ; i<n ; i++)
+        
+      cout<<arr[i]<<"  ";
+        
+      cout<<endl;
+
+}
+
+
+
+int main()
+{
+ 
+      int arr[]={100,60,20,50,30,90};
+    
+      bubbleSort(arr,6);
+    
+      printArray(arr,6);   
+   
+      return 0;
+
+}
+
+----------------------------------------------------------------------------------------------------------
+Merge Sort :
+----------------------------------------------------------------------------------------------------------
+
+#include<iostream>
+using namespace std; 
+void merge(int arr[], int l, int m, int r)  //m = l + (r - l) / 2;       
+{
+	int i, j, k;
+	int n1 = m - l + 1;              // First subarray is arr[l..m]                   
+	int n2 = r - m;                 // Second subarray is arr[m+1..r]                     
+	int *L=new int[n1], *R=new int[n2];
+	
+	for (i = 0; i < n1; i++)
+		L[i] = arr[l + i];
+	for (j = 0; j < n2; j++)
+		R[j] = arr[m + 1 + j];
+
+	i = j = 0; 
+	k = l;
+
+	while (i < n1 && j < n2)
+	{
+		if (L[i] <= R[j])
+		{
+			arr[k] = L[i];
+			i++;
+		}
+		else
+		{
+			arr[k] = R[j];
+			j++;
+		}
+		k++;
+	}
+
+	while (i < n1)
+	{
+		arr[k] = L[i];
+		i++;
+		k++;
+	}
+
+	while (j < n2)
+	{
+		arr[k] = R[j];
+		j++;
+		k++;
+	}
+}
+
+
+void mergeSort(int arr[], int l, int r)
+{
+	if (l < r)
+	{
+		int m = l + (r - l) / 2;
+        
+		mergeSort(arr, l, m);
+		mergeSort(arr, m + 1, r);
+
+		merge(arr, l, m, r);
+	}
+}
+
+
+
+void print(int arr[], int n)
+{
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << " ";
+	}
+	cout << endl;
+
+}
+int main()
+{
+
+		int arr[] = { 60,10,20,5,60,70 };
+		mergeSort(arr, 0, 5);
+		print(arr,6);
+	return 0;
+
+}
+
+----------------------------------------------------------------------------------------------------------
+Quick Sort :
+----------------------------------------------------------------------------------------------------------
+
+#include<iostream>
+using namespace std;
+int partition1(int arr[], int l, int h)
+{
+	int p = arr[l];
+	int i = l;
+	int j = h;
+	while (i < j)
+	{
+		do
+		{
+			i++;
+		} while (arr[i] <= p);
+		do
+		{
+			j--;
+		} while (arr[j] > p);
+
+		if (i < j)
+			swap(arr[i], arr[j]);
+	}
+	swap(arr[l], arr[j]);
+	return j;
+}
+
+void quickSort1(int arr[], int l, int h)
+{
+
+	if (l < h) {
+		int piv = partition1(arr, l, h);
+		quickSort1(arr, l, piv);
+		quickSort1(arr, piv + 1, h);
+	}
+
+}
+
+
+
+int partition2(int arr[], int iBegin, int jEnd) {
+	int i = iBegin;
+	int j = jEnd;
+	int pivLoc = i;
+	while (true)
+	{
+		while (arr[pivLoc] <= arr[j] && pivLoc != j)
+		{
+			j--;
+		}
+		if (pivLoc == j)
+			break;
+		else if (arr[pivLoc] > arr[j])
+		{
+			swap(arr[j], arr[pivLoc]);
+			pivLoc = j;
+		}
+
+		while (arr[pivLoc] >= arr[i] && pivLoc != i)
+		{
+			i++;
+		}
+		if (pivLoc == i)
+			break;
+		else if (arr[pivLoc] < arr[i])
+		{
+			swap(arr[i], arr[pivLoc]);
+			pivLoc = i;
+		}
+	}
+	return pivLoc;
+}
+
+
+void quickSort2(int arr[], int l, int h)
+{
+
+	if (l < h) {
+		int piv = partition2(arr, l, h);
+		quickSort2(arr, l, piv - 1);
+		quickSort2(arr, piv + 1, h);
+	}
+
+}
+
+
+int main()
+{
+	int arr[] = { 2,-1,4,7,0 };
+	int n = sizeof(arr) / sizeof(arr[0]);
+
+	quickSort2(arr, 0, n - 1);
+	for (int i = 0; i < n; i++)
+	{
+		cout << arr[i] << " ";
+	}
+
+	return 0;
+}
+
+
+
+
+
