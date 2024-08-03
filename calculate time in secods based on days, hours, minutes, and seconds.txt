@@ -1,0 +1,50 @@
+#include <iostream>
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include<math.h>
+using namespace std;
+
+float timeInSeconds(float days, float hours, float minutes, float seconds) {
+	float sum = 0;
+	sum += days * 60 * 60 * 24;
+	sum += hours * 60 * 60;
+	sum += minutes * 60;
+	sum += seconds;
+	return sum;
+}
+
+
+int main()
+{
+	//Write a program to calculate the task duration in seconds and print it on screen
+	//  Given the time duration of a task in the number of days, hours, minutes, and seconds, .
+	//	Input
+	//	2
+	//	5
+	//	45
+	//	35
+
+/*	cout << "number of: days, hours, minutes, seconds\n";
+	float n, sum = 0;
+	cin >> n;
+	sum += n * 60 * 60 * 24;
+
+	cin >> n;
+	sum += n * 60 * 60;
+
+	cin >> n;
+	sum += n * 60;
+
+	cin >> n;
+	sum += n;
+
+	cout << sum << " seconds" << endl;
+*/
+// function
+	cout << "number of: days, hours, minutes, seconds\n";
+	float days, hours, minutes, seconds;
+	cin >> days >> hours >> minutes >> seconds;
+	cout << timeInSeconds(days, hours, minutes, seconds);
+
+
+}

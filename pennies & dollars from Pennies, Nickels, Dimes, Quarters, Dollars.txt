@@ -1,0 +1,39 @@
+#include <iostream>
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include<math.h>
+using namespace std;
+
+int main()
+{
+    //Write a program to ask the user to enter : Pennies, Nickels, Dimes, Quarters, Dollars
+    //    Then calculate the total pennies, total dollars and print them on screen
+    //    giving that :
+    //     Penny = 1
+    //     Nickel = 5
+    //     Dime = 10
+    //     Quarter = 25
+    //     Dollar = 100
+    //     Example Inputs :
+    //     5, 5, 5, 5, 5
+    //     Outputs
+    //     705 Pennies
+    //     7.05 Dollars
+
+    cout << "enter: pennies, nickels, dimes, quarters, dollars\n";
+    float sum = 0;
+
+    float a; cin >> a;
+    sum += a * 1;
+    cin >> a;
+    sum += a * 5;
+    cin >> a;
+    sum += a * 10;
+    cin >> a;
+    sum += a * 25;
+    cin >> a;
+    sum += a * 100;
+
+    cout << sum << " pennies\n";
+    cout << sum / 100 << " dollars" << endl;
+}
