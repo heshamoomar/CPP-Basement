@@ -1,0 +1,91 @@
+#include <iostream>
+#include<string>
+#include<vector>
+using namespace std;
+
+const char* GenderStrings[] = { "Male","Female" };
+const char* MaritalStatusStrings[] = { "Single","Married" };
+const char* ColorStrings[] = { "Red","Green","Bule","White","Black" };
+
+struct stAddress {
+	string fullAddress;
+	int PostalCode = 0;
+};
+
+struct stContactInfo {
+	string Phone;
+	string Email;
+	stAddress Address;
+};
+
+struct stPerson
+{
+	string FullName;
+	stContactInfo ContactInfo;
+};
+
+short inputGender;
+short inputMStatus;
+short inputColor;
+
+void enter_persons_info(vector<stPerson>& vPersons) {
+	stPerson tempPerson;	//	temp variable of type stPerson
+	char choice;
+	do
+	{
+		cout << "Full name: ";
+		//cin.ignore(); 
+		getline(cin, tempPerson.FullName);
+		cout << "Phone number: ";
+		cin >> tempPerson.ContactInfo.Phone;
+		cout << "E-mail: ";
+		cin >> tempPerson.ContactInfo.Email;
+		cout << "Full address: ";
+		cin.ignore(); getline(cin, tempPerson.ContactInfo.Address.fullAddress);
+		cout << "Postal code: ";
+		cin >> tempPerson.ContactInfo.Address.PostalCode;
+		cout << "Gender (0=Male, 1=Female): ";
+		cin >> inputGender;
+		cout << "Marital status (0=Single, 1=Married): ";
+		cin >> inputMStatus;
+		cout << "Favourite color (0=Red, 1=Green, 2=Blue, 3=White, 4=Black): ";
+		cin >> inputColor;
+		cout << '\n';
+		if (inputGender != 0 && inputGender != 1) inputGender = 0;
+		if (inputMStatus != 0 && inputMStatus != 1) inputMStatus = 0;
+		if (inputColor < 0 || inputColor > 4) inputColor = 0;
+
+		vPersons.push_back(tempPerson);
+
+		cout << "Do you want to enter another person? (y/n)";
+		cin >> choice;
+
+	} while (choice != 'n' && choice != 'N');
+}
+
+void print_persons_info(vector<stPerson>& vPersons) {
+	
+	for (auto& person : vPersons) {
+		cout << "--------------------------------\n";
+		cout << "Full name: " << person.FullName << '\n';
+		cout << "Phone number: " << person.ContactInfo.Phone << '\n';
+		cout << "E-mail: " << person.ContactInfo.Email << '\n';
+		cout << "Full address: " << person.ContactInfo.Address.fullAddress << '\n';
+		cout << "Postal code: " << person.ContactInfo.Address.PostalCode << '\n';
+		cout << "Gender: " << GenderStrings[inputGender] << '\n';
+		cout << "Marital status: " << MaritalStatusStrings[inputMStatus] << '\n';
+		cout << "Favorite color: " << ColorStrings[inputColor] << '\n';
+		cout /*<< "--------------------------------"*/ << endl;
+
+	}
+}
+
+int main()
+{
+	stPerson Person1;
+
+	vector<stPerson> vPersons;
+	enter_persons_info(vPersons);
+	print_persons_info(vPersons);
+
+}
