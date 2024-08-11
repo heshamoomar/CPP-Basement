@@ -1,7 +1,7 @@
 // DP top-down approach (memoization) O(n)
 #include<iostream>
 using namespace std;
-#define ll unsigned long long
+#define ll long long
 const ll sz = 101;
 ll arr[sz];
 
